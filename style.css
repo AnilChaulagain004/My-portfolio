@@ -173,12 +173,19 @@ a:hover {
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent-primary);
-    transition: transform var(--transition-fast);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(-3deg);
+}
+
+.logo:active {
+    transform: scale(0.95);
 }
 
 .nav-menu {
@@ -193,7 +200,7 @@ a:hover {
     font-weight: 500;
     position: relative;
     padding: 0.5rem 0;
-    transition: color var(--transition-fast);
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .nav-link::after {
@@ -203,12 +210,22 @@ a:hover {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--accent-primary);
-    transition: width var(--transition-base);
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+    color: var(--accent-primary);
+    transform: translateY(-1px);
 }
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+.nav-link:active {
+    transform: scale(0.95);
+    opacity: 0.8;
 }
 
 .theme-toggle {
@@ -221,11 +238,18 @@ a:hover {
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-md);
-    transition: background-color var(--transition-fast);
+    border: 1px solid transparent;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-toggle:hover {
     background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    transform: rotate(15deg) scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: rotate(-15deg) scale(0.9);
 }
 
 .sun-icon, .moon-icon {
@@ -326,13 +350,20 @@ a:hover {
     border-radius: var(--radius-md);
     background-color: var(--bg-secondary);
     color: var(--text-primary);
-    transition: all var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-social a:hover {
-    background-color: var(--accent-primary);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
-    transform: translateY(-3px);
+    border-color: transparent;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.3);
+}
+
+.hero-social a:active {
+    transform: scale(0.95);
 }
 
 .hero-visual {
@@ -399,9 +430,35 @@ a:hover {
     font-weight: 600;
     border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
     border: 2px solid transparent;
     font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+.btn:active::after {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0s;
+}
+
+.btn:active {
+    transform: scale(0.95);
+    filter: brightness(0.95);
 }
 
 .btn-primary {
@@ -411,8 +468,8 @@ a:hover {
 
 .btn-primary:hover {
     background-color: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
 }
 
 .btn-secondary {
@@ -424,6 +481,8 @@ a:hover {
 .btn-secondary:hover {
     background-color: var(--accent-primary);
     color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.2);
 }
 
 /* ===================================
@@ -456,11 +515,18 @@ a:hover {
     padding: var(--spacing-md);
     background-color: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    transition: transform var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .highlight-item:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.highlight-item:active {
+    transform: scale(0.97) translateY(-3px);
 }
 
 .highlight-item h3 {
@@ -506,12 +572,18 @@ a:hover {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .skill-category:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.skill-category:active {
+    transform: scale(0.98) translateY(-2px);
 }
 
 .skill-category-title {
@@ -533,13 +605,20 @@ a:hover {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-primary);
-    transition: all var(--transition-fast);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-item:hover {
-    background-color: var(--accent-primary);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
-    transform: scale(1.05);
+    border-color: transparent;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.skill-item:active {
+    transform: translateY(0) scale(0.97);
 }
 
 /* ===================================
@@ -557,12 +636,18 @@ a:hover {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.project-card:active {
+    transform: scale(0.99) translateY(-6px);
 }
 
 .project-image {
@@ -649,12 +734,18 @@ a:hover {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.blog-card:active {
+    transform: scale(0.99) translateY(-3px);
 }
 
 .blog-meta {
@@ -737,11 +828,18 @@ a:hover {
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .timeline-content:hover {
-    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+    box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.timeline-content:active {
+    transform: scale(0.995) translateX(3px);
 }
 
 .timeline-date {
@@ -808,11 +906,18 @@ a:hover {
     padding: var(--spacing-md);
     background-color: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    transition: transform var(--transition-base);
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .contact-item:hover {
     transform: translateX(5px);
+    box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.contact-item:active {
+    transform: scale(0.99) translateX(3px);
 }
 
 .contact-icon {
@@ -866,13 +971,15 @@ a:hover {
     color: var(--text-primary);
     font-family: inherit;
     font-size: 1rem;
-    transition: border-color var(--transition-fast);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    transform: translateY(-1px);
 }
 
 .form-group textarea {
