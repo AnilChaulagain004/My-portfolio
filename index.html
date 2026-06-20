@@ -49,6 +49,9 @@
     </script>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
@@ -92,11 +95,15 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-bg-blobs">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
         <div class="container hero-container">
             <div class="hero-content">
                 <p class="hero-greeting">Hi, I'm</p>
                 <h1 class="hero-title">Anil Chaulagain</h1>
-                <p class="hero-subtitle">Aspiring Quality Assurance Engineer</p>
+                <p class="hero-subtitle"><span id="typed-text"></span><span class="typed-cursor">|</span></p>
                 <p class="hero-description">
                     Enthusiastic IT professional with hands-on experience in ISP technical support and systems troubleshooting, currently transitioning into Software Quality Assurance. Dedicated to delivering high-quality, reliable software products.
                 </p>

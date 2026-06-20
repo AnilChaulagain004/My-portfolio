@@ -218,3 +218,62 @@ window.addEventListener('scroll', debounce(highlightNavigation, 10));
 console.log('%c👋 Hello there!', 'font-size: 20px; font-weight: bold; color: #3b82f6;');
 console.log('%cLooking at the code? I like your style!', 'font-size: 14px; color: #6c757d;');
 console.log('%cFeel free to reach out if you want to collaborate!', 'font-size: 14px; color: #6c757d;');
+
+// ===================================
+// Scroll Progress Bar Update
+// ===================================
+window.addEventListener('scroll', () => {
+    const scrollProgress = document.getElementById('scrollProgress');
+    if (scrollProgress) {
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.pageYOffset / scrollHeight) * 100;
+        scrollProgress.style.width = scrolled + '%';
+    }
+});
+
+// ===================================
+// Typed Subtitle Effect
+// ===================================
+const typedTextSpan = document.getElementById('typed-text');
+const roles = ["Aspiring Quality Assurance Engineer", "Technical Support Specialist", "Problem Solver"];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingDelay = 100;
+let erasingDelay = 50;
+let newRoleDelay = 2000;
+
+function type() {
+    if (!typedTextSpan) return;
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+        // Erase character
+        typedTextSpan.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        
+        if (charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            setTimeout(type, 500); // delay before starting next word
+        } else {
+            setTimeout(type, erasingDelay);
+        }
+    } else {
+        // Type character
+        typedTextSpan.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        
+        if (charIndex === currentRole.length) {
+            isDeleting = true;
+            setTimeout(type, newRoleDelay); // wait at the end of the word
+        } else {
+            setTimeout(type, typingDelay);
+        }
+    }
+}
+
+// Start typing effect on load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(type, 1000);
+});

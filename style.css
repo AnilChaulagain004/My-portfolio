@@ -301,6 +301,8 @@ a:hover {
 
 .hero-content {
     animation: fadeInUp 0.8s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-greeting {
@@ -368,6 +370,8 @@ a:hover {
 
 .hero-visual {
     animation: fadeInUp 0.8s ease 0.2s backwards;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-image-wrapper {
@@ -1298,3 +1302,71 @@ a:hover {
 .mt-sm { margin-top: var(--spacing-sm); }
 .mt-md { margin-top: var(--spacing-md); }
 .mt-lg { margin-top: var(--spacing-lg); }
+
+/* ===================================
+   Advanced Animations & Interactive Styles
+   =================================== */
+
+/* Scroll Progress Bar at the top */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    width: 0%;
+    z-index: 2000;
+    transition: width 0.1s ease-out;
+}
+
+/* Typing Cursor blink */
+.typed-cursor {
+    font-weight: 200;
+    color: var(--accent-primary);
+    animation: cursorBlink 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Hero Background Blob Effects */
+.hero-bg-blobs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.blob {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0) 70%);
+    filter: blur(50px);
+    animation: moveBlob 15s infinite ease-in-out;
+}
+
+.blob-1 {
+    top: 5%;
+    left: 10%;
+}
+
+.blob-2 {
+    bottom: 5%;
+    right: 10%;
+    animation-delay: -7.5s;
+}
+
+@keyframes moveBlob {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(40px, -60px) scale(1.15);
+    }
+}
